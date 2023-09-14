@@ -15,39 +15,42 @@
             height: 100vh;
             margin: 0;
         }
-
+        
         .calculator-container {
             background-color: rgba(255, 255, 255, 0.2);
             padding: 10px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            max-width: 360px; /* Adjust the max-width as needed */
+            max-width: 760px; /* Adjust the max-width as needed */
             width: 100%; /* Ensure container takes the full width */
         }
-
+        
         .calculator-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Adjust column widths for 4 columns */
+            grid-template-columns: repeat(10, 1fr); /* 10 columns per row */
             grid-gap: 5px;
         }
-
+        
         .calculator-button {
-            font-size: 20px;
+            font-size: 16px; /* Adjust button font size */
             border-radius: 50%;
             background: linear-gradient(to bottom right, #74ebd5, #ACB6E5);
             color: white;
-            height: 60px; /* Reduce button height */
-            width: 60px; /* Reduce button width */
-            line-height: 60px;
+            height: 50px; /* Adjust button height */
+            width: 50px; /* Adjust button width */
+            line-height: 50px;
             text-align: center;
+            padding: 5px; /* Adjust padding */
         }
-
+        
         /* Style for the back button */
         .back-button {
             position: absolute;
             top: 10px;
             left: 10px;
         }
+        
+        
     </style>
 </head>
 <body>
@@ -57,34 +60,69 @@
     <div class="container mt-5">
         <h1 class="mb-4 text-center text-white">Calculator</h1>
         <div class="row justify-content-center">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="calculator-container">
                     <input type="text" id="display" class="form-control mb-2" disabled>
                     <div class="calculator-grid">
-                        <button onclick="clearDisplay()" class="btn btn-danger calculator-button">C</button>
+                        <!-- First Row -->
+                        <button onclick="appendToDisplay('(')" class="btn btn-primary calculator-button">(</button>
+                        <button onclick="appendToDisplay(')')" class="btn btn-primary calculator-button">)</button>
+                        <button onclick="memoryClear()" class="btn btn-primary calculator-button">MC</button>
+                        <button onclick="memoryAdd()" class="btn btn-primary calculator-button">M+</button>
+                        <button onclick="memorySubtract()" class="btn btn-primary calculator-button">M-</button>
+                        <button onclick="memoryRecall()" class="btn btn-primary calculator-button">MR</button>
+                        <button onclick="clearDisplay()" class="btn btn-danger calculator-button">AC</button>
                         <button onclick="togglePositiveNegative()" class="btn btn-info calculator-button">+/-</button>
                         <button onclick="appendToDisplay('%')" class="btn btn-info calculator-button">%</button>
                         <button onclick="appendToDisplay('÷')" class="btn btn-info calculator-button">÷</button>
-                        
+
+                        <!-- Second Row -->
+                        <button onclick="power(2)" class="btn btn-primary calculator-button">2nd</button>
+                        <button onclick="power(2, 2)" class="btn btn-primary calculator-button">x^2</button>
+                        <button onclick="power(2, 3)" class="btn btn-primary calculator-button">x^3</button>
+                        <button onclick="appendToDisplay('^')" class="btn btn-info calculator-button">x^y</button>
+                        <button onclick="exponential('e')" class="btn btn-info calculator-button">e^x</button>
+                        <button onclick="power(10, 10)" class="btn btn-info calculator-button">10^x</button>
                         <button onclick="appendToDisplay('7')" class="btn btn-primary calculator-button">7</button>
                         <button onclick="appendToDisplay('8')" class="btn btn-primary calculator-button">8</button>
                         <button onclick="appendToDisplay('9')" class="btn btn-primary calculator-button">9</button>
                         <button onclick="appendToDisplay('*')" class="btn btn-info calculator-button">×</button>
-                        
+
+                        <!-- Third Row -->
+                        <button onclick="reciprocal()" class="btn btn-primary calculator-button">1/2</button>
+                        <button onclick="squareRoot(2)" class="btn btn-primary calculator-button">2√x</button>
+                        <button onclick="squareRoot(3)" class="btn btn-primary calculator-button">3√x</button>
+                        <button onclick="appendToDisplay('y√x')" class="btn btn-info calculator-button">y√x</button>
+                        <button onclick="naturalLogarithm()" class="btn btn-info calculator-button">ln</button>
+                        <button onclick="logBase10()" class="btn btn-info calculator-button">log10</button>
                         <button onclick="appendToDisplay('4')" class="btn btn-primary calculator-button">4</button>
                         <button onclick="appendToDisplay('5')" class="btn btn-primary calculator-button">5</button>
                         <button onclick="appendToDisplay('6')" class="btn btn-primary calculator-button">6</button>
                         <button onclick="appendToDisplay('-')" class="btn btn-info calculator-button">-</button>
-                        
+
+                        <!-- Fourth Row -->
+                        <button onclick="factorial()" class="btn btn-primary calculator-button">x!</button>
+                        <button onclick="trigonometric('sin')" class="btn btn-primary calculator-button">sin</button>
+                        <button onclick="trigonometric('cos')" class="btn btn-primary calculator-button">cos</button>
+                        <button onclick="trigonometric('tan')" class="btn btn-primary calculator-button">tan</button>
+                        <button onclick="exponential('e')" class="btn btn-info calculator-button">e</button>
+                        <button onclick="scientificNotation()" class="btn btn-info calculator-button">EE</button>
                         <button onclick="appendToDisplay('1')" class="btn btn-primary calculator-button">1</button>
                         <button onclick="appendToDisplay('2')" class="btn btn-primary calculator-button">2</button>
                         <button onclick="appendToDisplay('3')" class="btn btn-primary calculator-button">3</button>
                         <button onclick="appendToDisplay('+')" class="btn btn-info calculator-button">+</button>
-                        
-                        <button onclick="appendToDisplay('0')" class="btn btn-primary calculator-button">0</button>
+
+                        <!-- Fifth Row -->
+                        <button onclick="toggleRadianDegree()" class="btn btn-primary calculator-button">Rad</button>
+                        <button onclick="trigonometric('sinh')" class="btn btn-primary calculator-button">sinh</button>
+                        <button onclick="trigonometric('cosh')" class="btn btn-primary calculator-button">cosh</button>
+                        <button onclick="trigonometric('tanh')" class="btn btn-primary calculator-button">tanh</button>
+                        <button onclick="appendToDisplay('π')" class="btn btn-info calculator-button">π</button>
+                        <button onclick="randomNumber()" class="btn btn-info calculator-button">Rand</button>
+                        <button onclick="appendToDisplay('0')" class="btn btn-primary calculator-button" style="grid-column: span 2; width: 120px;">0</button>
                         <button onclick="appendToDisplay('.')" class="btn btn-primary calculator-button">.</button>
-                        <button onclick="appendToDisplay('^')" class="btn btn-info calculator-button">^</button>
                         <button onclick="calculate()" class="btn btn-success calculator-button">=</button>
+
                     </div>
                 </div>
             </div>
@@ -113,6 +151,8 @@
                 expression = expression.replace("^", "**");
                 // Replace ÷ with / for division
                 expression = expression.replace("÷", "/");
+                // Replace √ with the actual square root calculation
+                expression = expression.replace(/√/g, "Math.sqrt");
                 // Use the eval function to calculate the result
                 let result = eval(expression);
                 if (result === undefined || result === null || isNaN(result)) {
@@ -134,6 +174,7 @@
                 document.getElementById('display').value = 'Error';
             }
         }
+        
         
         function togglePositiveNegative() {
             const display = document.getElementById('display');
