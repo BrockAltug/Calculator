@@ -1,81 +1,53 @@
-<!--main app page-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+    <title>Index Page</title>
     <!-- Add Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .calculator-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 10px;
+        body {
+            background: linear-gradient(to bottom right, #74ebd5, #ACB6E5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
 
-        .calculator-button {
-            grid-column: span 1;
-            font-size: 20px;
+        .container {
+            text-align: center;
+        }
+
+        .button-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .index-button {
+            margin: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Calculator</h1>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="calculator">
-                    <input type="text" id="display" class="form-control mb-2" disabled>
-                    <div class="calculator-grid">
-                        
-                        <button onclick="appendToDisplay('7')" class="btn btn-primary calculator-button">7</button>
-                        <button onclick="appendToDisplay('8')" class="btn btn-primary calculator-button">8</button>
-                        <button onclick="appendToDisplay('9')" class="btn btn-primary calculator-button">9</button>
-                        <button onclick="appendToDisplay('0')" class="btn btn-primary calculator-button">0</button>
-                        <button onclick="appendToDisplay('4')" class="btn btn-primary calculator-button">4</button>
-                        <button onclick="appendToDisplay('5')" class="btn btn-primary calculator-button">5</button>
-                        <button onclick="appendToDisplay('6')" class="btn btn-primary calculator-button">6</button>
-                        <button onclick="clearDisplay()" class="btn btn-danger calculator-button">C</button>
-                        <button onclick="appendToDisplay('1')" class="btn btn-primary calculator-button">1</button>
-                        <button onclick="appendToDisplay('2')" class="btn btn-primary calculator-button">2</button>
-                        <button onclick="appendToDisplay('3')" class="btn btn-primary calculator-button">3</button>
-                        <button onclick="calculate()" class="btn btn-success calculator-button">=</button>
-                        <button onclick="appendToDisplay('+')" class="btn btn-info calculator-button">+</button>
-                        <button onclick="appendToDisplay('-')" class="btn btn-info calculator-button">-</button>
-                        <button onclick="appendToDisplay('*')" class="btn btn-info calculator-button">*</button>
-                        <button onclick="appendToDisplay('/')" class="btn btn-info calculator-button">/</button>
-
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="container">
+        <h1 class="mb-4 text-center text-white">Multi Purpose Calculator</h1>
+        <p class="text-white">Click the buttons on the right to get started:</p>
+        
     </div>
-
+    <div class="container button-column">
+        <!-- Add buttons here as needed -->
+        <a href="/calculator" class="btn btn-primary">Go to Calculator</a>
+        <button class="btn btn-success index-button">Button 1</button>
+        <button class="btn btn-info index-button">Button 2</button>
+        <button class="btn btn-warning index-button">Button 3</button>
+        <!-- Add more buttons as needed -->
+    </div>
     <!-- Add Bootstrap JS and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- JavaScript Functions -->
-    <script>
-        function appendToDisplay(value) {
-            document.getElementById('display').value += value;
-        }
-
-        function clearDisplay() {
-            document.getElementById('display').value = '';
-        }
-
-        function calculate() {
-            try {
-                document.getElementById('display').value = eval(document.getElementById('display').value);
-            } catch (error) {
-                document.getElementById('display').value = 'Error';
-            }
-        }
-    </script>
 </body>
 </html>
-
