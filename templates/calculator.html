@@ -1,190 +1,188 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
-    <!-- Add Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            background: linear-gradient(to bottom right, #74ebd5, #ACB6E5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        
-        .calculator-container {
-            background-color: rgba(255, 255, 255, 0.2);
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            max-width: 760px; /* Adjust the max-width as needed */
-            width: 100%; /* Ensure container takes the full width */
-        }
-        
-        .calculator-grid {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr); /* 10 columns per row */
-            grid-gap: 5px;
-        }
-        
-        .calculator-button {
-            font-size: 16px; /* Adjust button font size */
-            border-radius: 50%;
-            background: linear-gradient(to bottom right, #74ebd5, #ACB6E5);
-            color: white;
-            height: 50px; /* Adjust button height */
-            width: 50px; /* Adjust button width */
-            line-height: 50px;
+            background-color: #333;
+            color: #00bfff;
+            font-family: Arial, sans-serif;
             text-align: center;
-            padding: 5px; /* Adjust padding */
+        }
+    
+        h1 {
+            color: #00bfff;
+            font-size: 36px; /* Adjusted font size */
+        }
+
+    
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #444;
+        }
+    
+        table, th, td {
+            border: 1px solid black;
+        }
+    
+        th, td {
+            padding: 20px 40px;
+            font-size: 18px; /* Adjusted font size */
+        }
+    
+        input[type="button"] {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #00bfff;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            border: 2px solid #00bfff;
+            text-align: left;
+        }
+    
+        .display {
+            text-align: left;
         }
         
-        /* Style for the back button */
-        .back-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
+        a.back-button {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #00bfff;
         }
-        
-        
     </style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.js" integrity="sha512-BbVEDjbqdN3Eow8+empLMrJlxXRj5nEitiCAK5A1pUr66+jLVejo3PmjIaucRnjlB0P9R3rBUs3g5jXc8ti+fQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-    <!-- Back Button -->
-    <a href="/" class="btn btn-primary back-button">Back to Index</a>
-    
-    <div class="container mt-5">
-        <h1 class="mb-4 text-center text-white">Calculator</h1>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="calculator-container">
-                    <input type="text" id="display" class="form-control mb-2" disabled>
-                    <div class="calculator-grid">
-                        <!-- First Row -->
-                        <button onclick="appendToDisplay('(')" class="btn btn-primary calculator-button">(</button>
-                        <button onclick="appendToDisplay(')')" class="btn btn-primary calculator-button">)</button>
-                        <button onclick="memoryClear()" class="btn btn-primary calculator-button">MC</button>
-                        <button onclick="memoryAdd()" class="btn btn-primary calculator-button">M+</button>
-                        <button onclick="memorySubtract()" class="btn btn-primary calculator-button">M-</button>
-                        <button onclick="memoryRecall()" class="btn btn-primary calculator-button">MR</button>
-                        <button onclick="clearDisplay()" class="btn btn-danger calculator-button">AC</button>
-                        <button onclick="togglePositiveNegative()" class="btn btn-info calculator-button">+/-</button>
-                        <button onclick="appendToDisplay('%')" class="btn btn-info calculator-button">%</button>
-                        <button onclick="appendToDisplay('÷')" class="btn btn-info calculator-button">÷</button>
-
-                        <!-- Second Row -->
-                        <button onclick="power(2)" class="btn btn-primary calculator-button">2nd</button>
-                        <button onclick="power(2, 2)" class="btn btn-primary calculator-button">x^2</button>
-                        <button onclick="power(2, 3)" class="btn btn-primary calculator-button">x^3</button>
-                        <button onclick="appendToDisplay('^')" class="btn btn-info calculator-button">x^y</button>
-                        <button onclick="exponential('e')" class="btn btn-info calculator-button">e^x</button>
-                        <button onclick="power(10, 10)" class="btn btn-info calculator-button">10^x</button>
-                        <button onclick="appendToDisplay('7')" class="btn btn-primary calculator-button">7</button>
-                        <button onclick="appendToDisplay('8')" class="btn btn-primary calculator-button">8</button>
-                        <button onclick="appendToDisplay('9')" class="btn btn-primary calculator-button">9</button>
-                        <button onclick="appendToDisplay('*')" class="btn btn-info calculator-button">×</button>
-
-                        <!-- Third Row -->
-                        <button onclick="reciprocal()" class="btn btn-primary calculator-button">1/2</button>
-                        <button onclick="squareRoot(2)" class="btn btn-primary calculator-button">2√x</button>
-                        <button onclick="squareRoot(3)" class="btn btn-primary calculator-button">3√x</button>
-                        <button onclick="appendToDisplay('y√x')" class="btn btn-info calculator-button">y√x</button>
-                        <button onclick="naturalLogarithm()" class="btn btn-info calculator-button">ln</button>
-                        <button onclick="logBase10()" class="btn btn-info calculator-button">log10</button>
-                        <button onclick="appendToDisplay('4')" class="btn btn-primary calculator-button">4</button>
-                        <button onclick="appendToDisplay('5')" class="btn btn-primary calculator-button">5</button>
-                        <button onclick="appendToDisplay('6')" class="btn btn-primary calculator-button">6</button>
-                        <button onclick="appendToDisplay('-')" class="btn btn-info calculator-button">-</button>
-
-                        <!-- Fourth Row -->
-                        <button onclick="factorial()" class="btn btn-primary calculator-button">x!</button>
-                        <button onclick="trigonometric('sin')" class="btn btn-primary calculator-button">sin</button>
-                        <button onclick="trigonometric('cos')" class="btn btn-primary calculator-button">cos</button>
-                        <button onclick="trigonometric('tan')" class="btn btn-primary calculator-button">tan</button>
-                        <button onclick="exponential('e')" class="btn btn-info calculator-button">e</button>
-                        <button onclick="scientificNotation()" class="btn btn-info calculator-button">EE</button>
-                        <button onclick="appendToDisplay('1')" class="btn btn-primary calculator-button">1</button>
-                        <button onclick="appendToDisplay('2')" class="btn btn-primary calculator-button">2</button>
-                        <button onclick="appendToDisplay('3')" class="btn btn-primary calculator-button">3</button>
-                        <button onclick="appendToDisplay('+')" class="btn btn-info calculator-button">+</button>
-
-                        <!-- Fifth Row -->
-                        <button onclick="toggleRadianDegree()" class="btn btn-primary calculator-button">Rad</button>
-                        <button onclick="trigonometric('sinh')" class="btn btn-primary calculator-button">sinh</button>
-                        <button onclick="trigonometric('cosh')" class="btn btn-primary calculator-button">cosh</button>
-                        <button onclick="trigonometric('tanh')" class="btn btn-primary calculator-button">tanh</button>
-                        <button onclick="appendToDisplay('π')" class="btn btn-info calculator-button">π</button>
-                        <button onclick="randomNumber()" class="btn btn-info calculator-button">Rand</button>
-                        <button onclick="appendToDisplay('0')" class="btn btn-primary calculator-button" style="grid-column: span 2; width: 120px;">0</button>
-                        <button onclick="appendToDisplay('.')" class="btn btn-primary calculator-button">.</button>
-                        <button onclick="calculate()" class="btn btn-success calculator-button">=</button>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add Bootstrap JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- JavaScript Functions -->
+    <h1>Calculator</h1>
+    <form>
+        <table>
+            <tr>
+                <td colspan="6">
+                    <input id="display" type="text">
+                </td>
+            </tr>
+            <tr>
+                <td><input type="button" value="1" onclick="display.value += '1'"></td>
+                <td><input type="button" value="2" onclick="display.value += '2'"></td>
+                <td><input type="button" value="3" onclick="display.value += '3'"></td>
+                <td><input type="button" value="C" onclick="display.value = ''"></td>
+                <td><input type="button" value="⌫" onclick="backspace()"></td>
+                <td><input type="button" value="=" onclick="calculate()"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="4" onclick="display.value += '4'"></td>
+                <td><input type="button" value="5" onclick="display.value += '5'"></td>
+                <td><input type="button" value="6" onclick="display.value += '6'"></td>
+                <td><input type="button" value="-" onclick="display.value += '-'"></td>
+                <td><input type="button" value="%" onclick="display.value += '%'"></td>
+                <td><input type="button" value="cos(" onclick="display.value += 'cos('"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="7" onclick="display.value += '7'"></td>
+                <td><input type="button" value="8" onclick="display.value += '8'"></td>
+                <td><input type="button" value="9" onclick="display.value += '9'"></td>
+                <td><input type="button" value="x" onclick="display.value += '*'"></td>
+                <td><input type="button" value="!" onclick="display.value += '!'"></td>
+                <td><input type="button" value="sin(" onclick="display.value += 'sin('"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="." onclick="display.value += '.'"></td>
+                <td><input type="button" value="0" onclick="display.value += '0'"></td>
+                <td><input type="button" value="," onclick="display.value += ','"></td>
+                <td><input type="button" value="+" onclick="display.value += '+'"></td>
+                <td><input type="button" value="/" onclick="display.value += '/'"></td>
+                <td><input type="button" value="tan(" onclick="display.value += 'tan('"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="E" onclick="e()"></td>
+                <td><input type="button" value="pi" onclick="pi()"></td>
+                <td><input type="button" value="^" onclick="power()"></td>
+                <td><input type="button" value="(" onclick="display.value += '('"></td>
+                <td><input type="button" value=")" onclick="display.value += ')'"></td>
+                <td><input type="button" value="log(" onclick="base10Log()"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="sqrt(" onclick="squareRoot()"></td>
+                <td><input type="button" value="ln2" onclick="display.value += Math.LN2"></td>
+                <td><input type="button" value="log10(" onclick="base10Log()"></td>
+                <td><input type="button" value="l2e" onclick="display.value += Math.LOG2E"></td>
+                <td><input type="button" value="l10e" onclick="display.value += Math.LOG10E"></td>
+                <td><input type="button" value="exp(" onclick="display.value += 'exp('"></td>
+            </tr>
+            
+        </table>
+    </form>
     <script>
-        function appendToDisplay(value) {
-            document.getElementById('display').value += value;
+        function backspace() {
+            let display = document.getElementById("display");
+            display.value = display.value.slice(0, -1);
         }
-        
-        function clearDisplay() {
-            document.getElementById('display').value = '';
-        }
-        
+
         function calculate() {
+            let display = document.getElementById("display");
+            let expression = display.value;
+            let result;
+
             try {
-                let expression = document.getElementById('display').value;
-                // Replace ^ with ** for exponentiation
-                expression = expression.replace("^", "**");
-                // Replace ÷ with / for division
-                expression = expression.replace("÷", "/");
-                // Replace √ with the actual square root calculation
-                expression = expression.replace(/√/g, "Math.sqrt");
-                // Use the eval function to calculate the result
-                let result = eval(expression);
-                if (result === undefined || result === null || isNaN(result)) {
-                    document.getElementById('display').value = 'Error';
-                } else {
-                    // Check if the result is a multiplication
-                    if (expression.includes('*')) {
-                        // Display the result of multiplication up to 2 decimal places
-                        document.getElementById('display').value = result.toFixed(2);
-                    } else if (expression.includes('/')) {
-                        // Display the result of division up to 10 decimal places
-                        document.getElementById('display').value = result.toFixed(10);
-                    } else {
-                        // Display other results normally
-                        document.getElementById('display').value = result;
-                    }
-                }
+                // Convert trigonometric function inputs from degrees to radians
+                expression = expression.replace(/sin\(/g, 'sin(' + Math.PI / 180 + '*');
+                expression = expression.replace(/cos\(/g, 'cos(' + Math.PI / 180 + '*');
+                expression = expression.replace(/tan\(/g, 'tan(' + Math.PI / 180 + '*');
+
+                result = math.evaluate(expression);
+                display.value = result;
             } catch (error) {
-                document.getElementById('display').value = 'Error';
+                display.value = "Error";
             }
         }
-        
-        
-        function togglePositiveNegative() {
-            const display = document.getElementById('display');
-            if (display.value.startsWith('-')) {
-                display.value = display.value.substring(1);
-            } else {
-                display.value = '-' + display.value;
-            }
+
+        function squareRoot() {
+            let display = document.getElementById("display");
+            display.value += "sqrt(";
         }
-        
+
+        function base10Log() {
+            let display = document.getElementById("display");
+            display.value += "log(";
+        }
+
+        function pi() {
+            let display = document.getElementById("display");
+            display.value += "pi";
+        }
+
+        function e() {
+            let display = document.getElementById("display");
+            display.value += "e";
+        }
+
+        function power() {
+            let display = document.getElementById("display");
+            display.value += "^(";
+        }
     </script>
+    <div>
+        <a href="/" class="back-button"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+
+    </div>
 </body>
+
 </html>
