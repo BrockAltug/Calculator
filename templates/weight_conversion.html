@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weight Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #333;
+            color: #00bfff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            margin: 20px auto;
+            width: 300px;
+            background-color: #333; /* Dark background color */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #00bfff;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            font-size: 18px;
+            color: #00bfff; /* Text color for input fields */
+            background-color: #333; /* Dark background color for input fields */
+            border: 2px solid #00bfff; /* Border color for input fields */
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            font-size: 18px;
+            color: #00bfff; /* Text color for select fields */
+            background-color: #333; /* Dark background color for select fields */
+            border: 2px solid #00bfff; /* Border color for select fields */
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 20px;
+            color: #00bfff;
+        }
+
+        a.back-button {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #00bfff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Weight Converter</h1>
+        <input type="number" id="inputValue" placeholder="Enter weight" oninput="convert()">
+
+        <select id="fromUnit" onchange="convert()">
+            <option value="grams">Grams</option>
+            <option value="kilograms">Kilograms</option>
+            <option value="pounds">Pounds</option>
+            <option value="ounces">Ounces</option>
+        </select>
+        <select id="toUnit" onchange="convert()">
+            <option value="grams">Grams</option>
+            <option value="kilograms">Kilograms</option>
+            <option value="pounds">Pounds</option>
+            <option value="ounces">Ounces</option>
+        </select>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function convert() {
+            // Retrieve input values
+            let inputValue = parseFloat(document.getElementById("inputValue").value);
+            let fromUnit = document.getElementById("fromUnit").value;
+            let toUnit = document.getElementById("toUnit").value;
+
+            // Conversion factors for different units
+            const conversionFactors = {
+                grams: {
+                    grams: 1,
+                    kilograms: 0.001,
+                    pounds: 0.00220462,
+                    ounces: 0.03527396,
+                },
+                kilograms: {
+                    grams: 1000,
+                    kilograms: 1,
+                    pounds: 2.20462,
+                    ounces: 35.27396,
+                },
+                pounds: {
+                    grams: 453.59237,
+                    kilograms: 0.45359,
+                    pounds: 1,
+                    ounces: 16,
+                },
+                ounces: {
+                    grams: 28.34952,
+                    kilograms: 0.02835,
+                    pounds: 0.0625,
+                    ounces: 1,
+                },
+            };
+
+            // Calculate the result
+            const result = inputValue * conversionFactors[fromUnit][toUnit];
+
+            // Display the result
+            document.getElementById("result").innerHTML = result.toFixed(4);
+        }
+    </script>
+    <div>
+        <a href="/dashboard" class="back-button"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
+</body>
+
+</html>
+
