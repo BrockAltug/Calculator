@@ -1,8 +1,5 @@
 # MULTIPURPOSE CALCULATOR
 
-## VIDEO DEMO:
-[Link to Video Demo](https://www.youtube.com/watch?v=jahqp-2Rozk)
-
 ## DESCRIPTION:
 This is a multipurpose calculator with a main index.html dashboard displaying 3 buttons: Calculator, Measurement Converter, and Weight Converter. The calculator works as a fully functioning calculator with scientific methods included. The measurement converter handles all conversions between measurements in distance. The weight converter handles all conversions between weight.
 
@@ -32,14 +29,4 @@ This is a multipurpose calculator with a main index.html dashboard displaying 3 
 - JavaScript
 - Python
 
-
-### When creating this project, Design choices were made to enhance user experience and functionality:
-
-- **User-Friendly Interface**: The user interface for each component is designed to be intuitive and straightforward. Users are able to quickly grasp how to use the calculator, measurement converter, and weight converter without any steep learning curve.
-
-- **Versatility**: Aimed to create a multipurpose tool that can cater to a wide range of mathematical and unit conversion needs. The inclusion of scientific calculator functions and various unit conversions makes the project versatile.
-
-- **Accessibility**: Strived to make the project accessible to a diverse user base. The web-based nature of the application ensures it can be used on various devices and platforms with internet access.
-
-- **Clean Code**: Prioritized writing clean, well-documented code to facilitate future maintenance and potential contributions from the open-source community.
 
