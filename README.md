@@ -10,7 +10,7 @@ This is a multipurpose calculator with a main index dashboard displaying 3 butto
 
 - **Calculator**: This section provides a fully functional calculator with basic arithmetic operations (addition, subtraction, multiplication, division) and scientific functions (trigonometric, logarithmic, exponential, etc.).
 
-- **Measurement Converter**: This module allows users to convert various measurements related to distance, such as length, area, volume, etc. Users can easily switch between different units and get accurate conversions.
+- **Measurement Converter**: This module allows users to convert various measurements related to distance. Users can easily switch between different units and get accurate conversions.
 
 - **Weight Converter**: In this section, users can convert between various weight units, making it convenient for tasks like converting pounds to kilograms or vice versa.
 
@@ -29,4 +29,6 @@ This is a multipurpose calculator with a main index dashboard displaying 3 butto
 - HTML
 - CSS
 - JavaScript
+- Python
+
 
