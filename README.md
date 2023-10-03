@@ -1,7 +1,7 @@
 # MULTIPURPOSE CALCULATOR
 
 ## VIDEO DEMO:
-[Link to Video Demo](#)  <!-- Replace with the actual link to your video demo -->
+[Link to Video Demo](https://www.youtube.com/watch?v=jahqp-2Rozk)
 
 ## DESCRIPTION:
 This is a multipurpose calculator with a main index dashboard displaying 3 buttons: Calculator, Measurement Converter, and Weight Converter. The calculator works as a fully functioning calculator with scientific methods included. The measurement converter handles all conversions between measurements in distance. The weight converter handles all conversions between weight.
