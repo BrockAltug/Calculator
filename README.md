@@ -30,8 +30,3 @@ This is a multipurpose calculator with a main index dashboard displaying 3 butto
 - CSS
 - JavaScript
 
-### Installation and Setup:
-
-1. Clone this repository to your local machine.
-   ```bash
-   git clone [repository-url]
